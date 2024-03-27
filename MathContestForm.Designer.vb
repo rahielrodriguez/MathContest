@@ -290,7 +290,7 @@ Partial Class MathContestForm
         Me.ButtonsGroupBox.TabIndex = 10
         Me.ButtonsGroupBox.TabStop = False
         '
-        'Form1
+        'MathContestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -299,8 +299,8 @@ Partial Class MathContestForm
         Me.Controls.Add(Me.MathProblemTypeGroupBox)
         Me.Controls.Add(Me.MathProblemGroupBox)
         Me.Controls.Add(Me.StudentInformationGroupBox)
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "MathContestForm"
+        Me.Text = "Math Contest"
         Me.StudentInformationGroupBox.ResumeLayout(False)
         Me.StudentInformationGroupBox.PerformLayout()
         Me.MathProblemGroupBox.ResumeLayout(False)
