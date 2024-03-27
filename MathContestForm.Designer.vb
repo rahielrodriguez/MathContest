@@ -103,12 +103,13 @@ Partial Class MathContestForm
         '
         'GradeTextBox
         '
+        Me.GradeTextBox.Enabled = False
         Me.GradeTextBox.Location = New System.Drawing.Point(343, 68)
         Me.GradeTextBox.Name = "GradeTextBox"
         Me.GradeTextBox.Size = New System.Drawing.Size(46, 30)
         Me.GradeTextBox.TabIndex = 2
-        Me.MathContestToolTip.SetToolTip(Me.GradeTextBox, "This case is meant to be filled with the student's grade. Only students who are b" &
-        "etween 4th and 7th grade are eligible to take this Math Contest." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.MathContestToolTip.SetToolTip(Me.GradeTextBox, "This case is meant show the student's grade on this Math Contest. The grade will " &
+        "go from 1 to 4." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'StudentInformationGroupBox
         '
@@ -128,6 +129,7 @@ Partial Class MathContestForm
         '
         'FirstNumberTextBox
         '
+        Me.FirstNumberTextBox.Enabled = False
         Me.FirstNumberTextBox.Location = New System.Drawing.Point(6, 57)
         Me.FirstNumberTextBox.Name = "FirstNumberTextBox"
         Me.FirstNumberTextBox.Size = New System.Drawing.Size(205, 30)
@@ -146,6 +148,7 @@ Partial Class MathContestForm
         '
         'SecondNumberTextBox
         '
+        Me.SecondNumberTextBox.Enabled = False
         Me.SecondNumberTextBox.Location = New System.Drawing.Point(6, 123)
         Me.SecondNumberTextBox.Name = "SecondNumberTextBox"
         Me.SecondNumberTextBox.Size = New System.Drawing.Size(205, 30)
@@ -266,6 +269,7 @@ Partial Class MathContestForm
         '
         'SubmitButton
         '
+        Me.SubmitButton.Enabled = False
         Me.SubmitButton.Location = New System.Drawing.Point(6, 21)
         Me.SubmitButton.Name = "SubmitButton"
         Me.SubmitButton.Size = New System.Drawing.Size(178, 60)
@@ -287,6 +291,7 @@ Partial Class MathContestForm
         '
         'SummaryButton
         '
+        Me.SummaryButton.Enabled = False
         Me.SummaryButton.Location = New System.Drawing.Point(6, 178)
         Me.SummaryButton.Name = "SummaryButton"
         Me.SummaryButton.Size = New System.Drawing.Size(178, 60)
