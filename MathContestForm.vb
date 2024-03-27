@@ -3,7 +3,7 @@ Option Explicit On
 Public Class MathContestForm
 
     'TODO
-    '[ ]Set default values
+    '[x]Set default values
     '[ ]Set random numbers from 1 to 1000 to use in math problems
     '[ ]Set a program to use the random number to make an add, substract, multiplication or divide problems
     '[ ]Create a validation process for all fields available
@@ -11,4 +11,18 @@ Public Class MathContestForm
     '[ ]Make a program to shows a summary of all the math contest results up to the point when the button is pressed
     '[ ]Block the summary button if there are not answers available, and unlockit if atleast one answer has been submitedd
 
+    Sub SetDefaults()
+
+        NameTextBox.Text = ""
+        AgeTextBox.Text = ""
+        GradeTextBox.Text = ""
+        FirstNumberTextBox.Text = ""
+        SecondNumberTextBox.Text = ""
+        AnswerLabel.Text = ""
+        SubmitButton.Enabled = False
+        SummaryButton.Enabled = False
+
+        FirstNumberTextBox.Focus()
+
+    End Sub
 End Class
