@@ -22,6 +22,7 @@ Partial Class MathContestForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.NameTextBox = New System.Windows.Forms.TextBox()
         Me.NameLabel = New System.Windows.Forms.Label()
         Me.AgeTextBox = New System.Windows.Forms.TextBox()
@@ -46,6 +47,7 @@ Partial Class MathContestForm
         Me.SummaryButton = New System.Windows.Forms.Button()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ButtonsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.MathContestToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.StudentInformationGroupBox.SuspendLayout()
         Me.MathProblemGroupBox.SuspendLayout()
         Me.MathProblemTypeGroupBox.SuspendLayout()
@@ -58,6 +60,7 @@ Partial Class MathContestForm
         Me.NameTextBox.Name = "NameTextBox"
         Me.NameTextBox.Size = New System.Drawing.Size(268, 30)
         Me.NameTextBox.TabIndex = 0
+        Me.MathContestToolTip.SetToolTip(Me.NameTextBox, "This case is meant to be filled with the student's name.")
         '
         'NameLabel
         '
@@ -75,6 +78,8 @@ Partial Class MathContestForm
         Me.AgeTextBox.Name = "AgeTextBox"
         Me.AgeTextBox.Size = New System.Drawing.Size(46, 30)
         Me.AgeTextBox.TabIndex = 1
+        Me.MathContestToolTip.SetToolTip(Me.AgeTextBox, "This case is meant to be filled with the student's age. Only students who are bet" &
+        "ween 7 and 11 years old are eligible to do this Math Contest." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'AgeLabel
         '
@@ -102,6 +107,8 @@ Partial Class MathContestForm
         Me.GradeTextBox.Name = "GradeTextBox"
         Me.GradeTextBox.Size = New System.Drawing.Size(46, 30)
         Me.GradeTextBox.TabIndex = 2
+        Me.MathContestToolTip.SetToolTip(Me.GradeTextBox, "This case is meant to be filled with the student's grade. Only students who are b" &
+        "etween 4th and 7th grade are eligible to take this Math Contest." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'StudentInformationGroupBox
         '
@@ -125,6 +132,8 @@ Partial Class MathContestForm
         Me.FirstNumberTextBox.Name = "FirstNumberTextBox"
         Me.FirstNumberTextBox.Size = New System.Drawing.Size(205, 30)
         Me.FirstNumberTextBox.TabIndex = 3
+        Me.MathContestToolTip.SetToolTip(Me.FirstNumberTextBox, "This case is meant to be filled with the 1st Number of the problem, that will be " &
+        "a random number from 1 to 1000.")
         '
         'FirstNumberLabel
         '
@@ -141,6 +150,8 @@ Partial Class MathContestForm
         Me.SecondNumberTextBox.Name = "SecondNumberTextBox"
         Me.SecondNumberTextBox.Size = New System.Drawing.Size(205, 30)
         Me.SecondNumberTextBox.TabIndex = 4
+        Me.MathContestToolTip.SetToolTip(Me.SecondNumberTextBox, "This case is meant to be filled with the 2nd Number of the problem, that will be " &
+        "a random number from 1 to 1000.")
         '
         'SecondNumberLabel
         '
@@ -157,6 +168,8 @@ Partial Class MathContestForm
         Me.AnswerTextBox.Name = "AnswerTextBox"
         Me.AnswerTextBox.Size = New System.Drawing.Size(205, 30)
         Me.AnswerTextBox.TabIndex = 5
+        Me.MathContestToolTip.SetToolTip(Me.AnswerTextBox, "This case is meant to be filled with the students answer to the provided problem." &
+        "")
         '
         'AnswerLabel
         '
@@ -192,6 +205,8 @@ Partial Class MathContestForm
         Me.AddRadioButton.TabIndex = 7
         Me.AddRadioButton.TabStop = True
         Me.AddRadioButton.Text = "Add"
+        Me.MathContestToolTip.SetToolTip(Me.AddRadioButton, "This section is made for the teacher to select the math problem type that will be" &
+        " provided for the student.")
         Me.AddRadioButton.UseVisualStyleBackColor = True
         '
         'SubtractRadioButton
@@ -203,6 +218,8 @@ Partial Class MathContestForm
         Me.SubtractRadioButton.TabIndex = 8
         Me.SubtractRadioButton.TabStop = True
         Me.SubtractRadioButton.Text = "Subtract"
+        Me.MathContestToolTip.SetToolTip(Me.SubtractRadioButton, "This section is made for the teacher to select the math problem type that will be" &
+        " provided for the student.")
         Me.SubtractRadioButton.UseVisualStyleBackColor = True
         '
         'MultiplyRadioButton
@@ -214,6 +231,8 @@ Partial Class MathContestForm
         Me.MultiplyRadioButton.TabIndex = 9
         Me.MultiplyRadioButton.TabStop = True
         Me.MultiplyRadioButton.Text = "Multiply"
+        Me.MathContestToolTip.SetToolTip(Me.MultiplyRadioButton, "This section is made for the teacher to select the math problem type that will be" &
+        " provided for the student.")
         Me.MultiplyRadioButton.UseVisualStyleBackColor = True
         '
         'DivideRadioButton
@@ -225,6 +244,8 @@ Partial Class MathContestForm
         Me.DivideRadioButton.TabIndex = 10
         Me.DivideRadioButton.TabStop = True
         Me.DivideRadioButton.Text = "Divide"
+        Me.MathContestToolTip.SetToolTip(Me.DivideRadioButton, "This section is made for the teacher to select the math problem type that will be" &
+        " provided for the student.")
         Me.DivideRadioButton.UseVisualStyleBackColor = True
         '
         'MathProblemTypeGroupBox
@@ -240,6 +261,8 @@ Partial Class MathContestForm
         Me.MathProblemTypeGroupBox.TabIndex = 7
         Me.MathProblemTypeGroupBox.TabStop = False
         Me.MathProblemTypeGroupBox.Text = "Math Problem Type"
+        Me.MathContestToolTip.SetToolTip(Me.MathProblemTypeGroupBox, "This section is made for the teacher to select the math problem type that will be" &
+        " provided for the student.")
         '
         'SubmitButton
         '
@@ -248,6 +271,8 @@ Partial Class MathContestForm
         Me.SubmitButton.Size = New System.Drawing.Size(178, 60)
         Me.SubmitButton.TabIndex = 11
         Me.SubmitButton.Text = "Submit"
+        Me.MathContestToolTip.SetToolTip(Me.SubmitButton, "This button submits each answer made by the student once is pressed. This button " &
+        "only will work if all fields are filled.")
         Me.SubmitButton.UseVisualStyleBackColor = True
         '
         'ClearButton
@@ -257,6 +282,7 @@ Partial Class MathContestForm
         Me.ClearButton.Size = New System.Drawing.Size(178, 60)
         Me.ClearButton.TabIndex = 12
         Me.ClearButton.Text = "Clear"
+        Me.MathContestToolTip.SetToolTip(Me.ClearButton, "This button clears all the fields of the program.")
         Me.ClearButton.UseVisualStyleBackColor = True
         '
         'SummaryButton
@@ -266,6 +292,9 @@ Partial Class MathContestForm
         Me.SummaryButton.Size = New System.Drawing.Size(178, 60)
         Me.SummaryButton.TabIndex = 13
         Me.SummaryButton.Text = "Summary"
+        Me.MathContestToolTip.SetToolTip(Me.SummaryButton, "This button will show a summary of the student's answers of the math test availab" &
+        "le when is pressed. This button is not available to use until one answer is subm" &
+        "itedd.")
         Me.SummaryButton.UseVisualStyleBackColor = True
         '
         'ExitButton
@@ -275,6 +304,7 @@ Partial Class MathContestForm
         Me.ExitButton.Size = New System.Drawing.Size(178, 60)
         Me.ExitButton.TabIndex = 14
         Me.ExitButton.Text = "Exit"
+        Me.MathContestToolTip.SetToolTip(Me.ExitButton, "This button closes the whole program.")
         Me.ExitButton.UseVisualStyleBackColor = True
         '
         'ButtonsGroupBox
@@ -336,4 +366,5 @@ Partial Class MathContestForm
     Friend WithEvents SummaryButton As Button
     Friend WithEvents ExitButton As Button
     Friend WithEvents ButtonsGroupBox As GroupBox
+    Friend WithEvents MathContestToolTip As ToolTip
 End Class
