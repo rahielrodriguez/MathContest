@@ -269,7 +269,6 @@ Partial Class MathContestForm
         '
         'SubmitButton
         '
-        Me.SubmitButton.Enabled = False
         Me.SubmitButton.Location = New System.Drawing.Point(6, 21)
         Me.SubmitButton.Name = "SubmitButton"
         Me.SubmitButton.Size = New System.Drawing.Size(178, 60)
