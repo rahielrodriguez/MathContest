@@ -2,6 +2,9 @@
 Option Explicit On
 Public Class MathContestForm
 
+    Dim firstNumber As Integer
+    Dim secondNumber As Integer
+    Dim correctAnswer As Double
     'TODO
     '[x]Set default values
     '[X]Set a program to use random numbers from 1 to 1000 to make an add, substract, multiplication or divide problems
@@ -24,7 +27,7 @@ Public Class MathContestForm
         AddRadioButton.Focus()
 
     End Sub
-    Function ValidateUserField() As Boolean
+    Function ValidateUserFields() As Boolean
         'TODO
         '[X]Name cannot be blank
         '[X]Age cannot be blank
@@ -34,50 +37,66 @@ Public Class MathContestForm
 
         Dim message As String
         Dim age As UShort
+        Dim answer As Double
 
         If NameTextBox.Text = "" Then
+            NameTextBox.BackColor = Color.LightYellow
+            SubmitButton.Enabled = False
+            NameTextBox.Focus()
             Return False
         Else
+            NameTextBox.BackColor = Color.White
+            SubmitButton.Enabled = True
             Return True
         End If
 
         If AgeTextBox.Text = "" Then
+            AgeTextBox.BackColor = Color.LightYellow
+            SubmitButton.Enabled = False
+            AgeTextBox.Focus()
             Return False
         Else
-            Return True
             Try
                 age = CUShort(AgeTextBox.Text)
 
                 Select Case age
                     Case <= 7
                         message &= "Student not eligible to compete" & vbNewLine
-                        Return False
+                        SubmitButton.Enabled = True
                         AgeTextBox.Focus()
+                        Return False
                     Case 7 To 11
-
+                        SubmitButton.Enabled = True
+                        Return True
                     Case >= 11
                         message &= "Student not eligible to compete" & vbNewLine
-                        Return False
+                        SubmitButton.Enabled = True
                         AgeTextBox.Focus()
+                        Return False
                 End Select
             Catch ex As Exception
-                message &= "Age cannot be blank and must be a whole number!" & vbNewLine
+                AgeTextBox.BackColor = Color.Yellow
+                SubmitButton.Enabled = False
+                message &= "Age must be a whole number!" & vbNewLine
+                Return False
             End Try
-            MsgBox(message, MsgBoxStyle.Critical, "User Error")
         End If
 
-        MsgBox(message, MsgBoxStyle.Critical, "User Error")
+        If message <> "" Then
+            MsgBox(message, MsgBoxStyle.Critical, "User Error")
+            SubmitButton.Enabled = False
+            Return False
+        Else
+            SubmitButton.Enabled = True
+            Return True
+        End If
 
     End Function
     Sub Add()
-
-        Dim firstNumber As Integer
-        Dim secondNumber As Integer
-        Dim correctAnswer As Integer
         Randomize()
 
-        firstNumber = CInt(Rnd() * 999) + 1
-        secondNumber = CInt(Rnd() * 999) + 1
+        firstNumber = CInt(Rnd() * 99) + 1
+        secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber + secondNumber)
 
         FirstNumberTextBox.Text = CStr(firstNumber)
@@ -86,13 +105,10 @@ Public Class MathContestForm
 
     End Sub
     Sub Subtract()
-        Dim firstNumber As Integer
-        Dim secondNumber As Integer
-        Dim correctAnswer As Integer
         Randomize()
 
-        firstNumber = CInt(Rnd() * 999) + 1
-        secondNumber = CInt(Rnd() * 999) + 1
+        firstNumber = CInt(Rnd() * 99) + 1
+        secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber - secondNumber)
 
         FirstNumberTextBox.Text = CStr(firstNumber)
@@ -100,13 +116,10 @@ Public Class MathContestForm
         'AnswerTextBox.Text = CStr(correctAnswer)
     End Sub
     Sub Multiplication()
-        Dim firstNumber As Integer
-        Dim secondNumber As Integer
-        Dim correctAnswer As Integer
         Randomize()
 
-        firstNumber = CInt(Rnd() * 999) + 1
-        secondNumber = CInt(Rnd() * 999) + 1
+        firstNumber = CInt(Rnd() * 99) + 1
+        secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber * secondNumber)
 
         FirstNumberTextBox.Text = CStr(firstNumber)
@@ -114,13 +127,10 @@ Public Class MathContestForm
         'AnswerTextBox.Text = CStr(correctAnswer)
     End Sub
     Sub Divition()
-        Dim firstNumber As Integer
-        Dim secondNumber As Integer
-        Dim correctAnswer As Double
         Randomize()
 
-        firstNumber = CInt(Rnd() * 999) + 1
-        secondNumber = CInt(Rnd() * 999) + 1
+        firstNumber = CInt(Rnd() * 99) + 1
+        secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = Math.Round((CDbl(firstNumber / secondNumber)), 2, MidpointRounding.AwayFromZero)
 
         FirstNumberTextBox.Text = CStr(firstNumber)
@@ -162,11 +172,16 @@ Public Class MathContestForm
 
         'TODO
         '[ ]Enable submit button if user fields are validated
-        If ValidateUserField() = True Then
+        If ValidateUserFields() = True Then
             SubmitButton.Enabled = True
         Else
             SubmitButton.Enabled = False
         End If
 
+    End Sub
+
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles NameTextBox.Leave, AgeTextBox.Leave, AnswerTextBox.Leave
+
+        ValidateUserFields()
     End Sub
 End Class
