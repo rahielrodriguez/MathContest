@@ -7,6 +7,12 @@ Public Class MathContestForm
     Dim firstNumber As Integer
     Dim secondNumber As Integer
     Dim correctAnswer As Double
+    Dim currentAnswer As Double
+    Dim message As String
+    Dim answersRecord As New List(Of String)
+    Dim record As String
+    Dim correctAnswerCounter As Integer
+    Dim incorrectAnswerCounter As Integer
     'TODO
     '[x]Set default values
     '[X]Set a program to use random numbers from 1 to 1000 to make an add, substract, multiplication or divide problems
@@ -22,7 +28,8 @@ Public Class MathContestForm
         GradeTextBox.Text = ""
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
-        AnswerLabel.Text = ""
+        AnswerTextBox.Text = ""
+        AnswerTextBox.Enabled = False
         SubmitButton.Enabled = False
         SummaryButton.Enabled = False
 
@@ -156,6 +163,29 @@ Public Class MathContestForm
     End Sub
     Sub MathProblem()
 
+        'TODO
+        '[x]If answer is correct, display a congratulation message
+        '[X]If answer is correct, record message in a list for summary
+        '[X]If answer is incorrect, show a message with the correct answer
+        '[x]If answer is incorrect, record message in a list for summary
+        Try
+            currentAnswer = CDbl(AnswerTextBox.Text)
+
+            If currentAnswer = correctAnswer Then
+                correctAnswerCounter = correctAnswerCounter + 1
+                message &= $"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct{vbNewLine}"
+                answersRecord.Add(message)
+                MsgBox($"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct")
+            ElseIf currentAnswer <> correctAnswer Then
+                incorrectAnswerCounter = incorrectAnswerCounter + 1
+                message &= $"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct{vbNewLine}"
+                answersRecord.Add(message)
+                MsgBox($"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct")
+            End If
+            ClearProblem()
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -175,6 +205,11 @@ Public Class MathContestForm
         Divition()
     End Sub
 
+    Sub ClearProblem()
+        FirstNumberTextBox.Text = ""
+        SecondNumberTextBox.Text = ""
+        AnswerTextBox.Text = ""
+    End Sub
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
         SetDefaults()
         AddRadioButton.Focus()
@@ -183,6 +218,7 @@ Public Class MathContestForm
         NameTextBox.Enabled = True
         AgeTextBox.Enabled = True
         GradeTextBox.Enabled = True
+        AnswerTextBox.Enabled = False
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
@@ -194,6 +230,9 @@ Public Class MathContestForm
         NameTextBox.Enabled = False
         AgeTextBox.Enabled = False
         GradeTextBox.Enabled = False
+        SummaryButton.Enabled = True
+        AnswerTextBox.Enabled = True
+        MathProblem()
     End Sub
 
     Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles NameTextBox.Leave, AgeTextBox.Leave, GradeTextBox.Leave
@@ -209,4 +248,15 @@ Public Class MathContestForm
         End If
     End Sub
 
+    Private Sub SummaryButton_Click(sender As Object, e As EventArgs) Handles SummaryButton.Click
+
+        'TODO
+        '[ ] summary has to show each result individualy as a list, not al concadenated
+
+        Dim results As String = ""
+        For Each elem As String In answersRecord
+            results &= elem & $"{vbNewLine}"
+        Next
+        MsgBox(answersRecord, MsgBoxStyle.Information, "Math Contest Summary")
+    End Sub
 End Class
