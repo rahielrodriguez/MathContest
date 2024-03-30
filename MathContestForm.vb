@@ -1,5 +1,7 @@
 ﻿Option Strict On
 Option Explicit On
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
 Public Class MathContestForm
 
     Dim firstNumber As Integer
@@ -27,22 +29,14 @@ Public Class MathContestForm
         AddRadioButton.Focus()
 
     End Sub
-    Function ValidateUserFields() As Boolean
+    Function ValidateName() As Boolean
         'TODO
         '[X]Name cannot be blank
-        '[X]Age cannot be blank
-        '[X]Age must be a positive whole number
-        '[X]Age must be between 7 and 11
-        '[x]Display an error message if age is not in range
-
-        Dim message As String
-        Dim age As UShort
-        Dim answer As Double
+        '[x]Lock name cage if not valid
 
         If NameTextBox.Text = "" Then
             NameTextBox.BackColor = Color.LightYellow
             SubmitButton.Enabled = False
-            NameTextBox.Focus()
             Return False
         Else
             NameTextBox.BackColor = Color.White
@@ -50,48 +44,71 @@ Public Class MathContestForm
             Return True
         End If
 
-        If AgeTextBox.Text = "" Then
+    End Function
+
+    Function ValidateAge() As Boolean
+
+        '[X]Age cannot be blank
+        '[X]Age must be a positive whole number
+        '[X]Age must be between 7 and 11
+        '[x]Block submit button if age is not in range
+        Dim age As UShort
+
+        Try
+            age = CUShort(AgeTextBox.Text)
+
+            Select Case age
+                Case <= 6
+                    AgeTextBox.BackColor = Color.LightYellow
+                    SubmitButton.Enabled = False
+                    Return False
+                Case 7 To 11
+                    AgeTextBox.BackColor = Color.White
+                    SubmitButton.Enabled = True
+                    Return True
+                Case >= 11
+                    AgeTextBox.BackColor = Color.LightYellow
+                    SubmitButton.Enabled = False
+                    Return False
+            End Select
+        Catch ex As Exception
             AgeTextBox.BackColor = Color.LightYellow
             SubmitButton.Enabled = False
-            AgeTextBox.Focus()
             Return False
-        Else
-            Try
-                age = CUShort(AgeTextBox.Text)
-
-                Select Case age
-                    Case <= 7
-                        message &= "Student not eligible to compete" & vbNewLine
-                        SubmitButton.Enabled = True
-                        AgeTextBox.Focus()
-                        Return False
-                    Case 7 To 11
-                        SubmitButton.Enabled = True
-                        Return True
-                    Case >= 11
-                        message &= "Student not eligible to compete" & vbNewLine
-                        SubmitButton.Enabled = True
-                        AgeTextBox.Focus()
-                        Return False
-                End Select
-            Catch ex As Exception
-                AgeTextBox.BackColor = Color.Yellow
-                SubmitButton.Enabled = False
-                message &= "Age must be a whole number!" & vbNewLine
-                Return False
-            End Try
-        End If
-
-        If message <> "" Then
-            MsgBox(message, MsgBoxStyle.Critical, "User Error")
-            SubmitButton.Enabled = False
-            Return False
-        Else
-            SubmitButton.Enabled = True
-            Return True
-        End If
+        End Try
 
     End Function
+    Function ValidateGrade() As Boolean
+        '[X]Grade cannot be blank
+        '[X]Grade must be a positive whole number
+        '[X]Grade must be between 1 and 4
+        '[x]Block submit button if grade is not valid
+        Dim grade As UShort
+        Try
+            grade = CUShort(GradeTextBox.Text)
+
+            Select Case grade
+                Case 0
+                    GradeTextBox.BackColor = Color.LightYellow
+                    SubmitButton.Enabled = False
+                    GradeTextBox.Focus()
+                    Return False
+                Case 1 To 4
+                    GradeTextBox.BackColor = Color.White
+                    SubmitButton.Enabled = True
+                    Return True
+                Case >= 4
+                    GradeTextBox.BackColor = Color.LightYellow
+                    SubmitButton.Enabled = False
+                    Return False
+            End Select
+        Catch ex As Exception
+            GradeTextBox.BackColor = Color.LightYellow
+            SubmitButton.Enabled = False
+            Return False
+        End Try
+    End Function
+
     Sub Add()
         Randomize()
 
@@ -137,7 +154,8 @@ Public Class MathContestForm
         SecondNumberTextBox.Text = CStr(secondNumber)
         'AnswerTextBox.Text = CStr(correctAnswer)
     End Sub
-    Sub MathProblemSelection()
+    Sub MathProblem()
+
 
     End Sub
 
@@ -162,6 +180,9 @@ Public Class MathContestForm
         AddRadioButton.Focus()
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
+        NameTextBox.Enabled = True
+        AgeTextBox.Enabled = True
+        GradeTextBox.Enabled = True
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
@@ -169,19 +190,23 @@ Public Class MathContestForm
     End Sub
 
     Private Sub SubmitButton_Click(sender As Object, e As EventArgs) Handles SubmitButton.Click
+        '[x]Block name, age and grade once is submitted
+        NameTextBox.Enabled = False
+        AgeTextBox.Enabled = False
+        GradeTextBox.Enabled = False
+    End Sub
 
-        'TODO
-        '[ ]Enable submit button if user fields are validated
-        If ValidateUserFields() = True Then
-            SubmitButton.Enabled = True
-        Else
-            SubmitButton.Enabled = False
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles NameTextBox.Leave, AgeTextBox.Leave, GradeTextBox.Leave
+
+        If ValidateName() = False Then
+            NameTextBox.Focus()
+
+        ElseIf ValidateAge() = False Then
+            AgeTextBox.Focus()
+
+        ElseIf ValidateGrade() = False Then
+            GradeTextBox.Focus()
         End If
-
     End Sub
 
-    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles NameTextBox.Leave, AgeTextBox.Leave, AnswerTextBox.Leave
-
-        ValidateUserFields()
-    End Sub
 End Class

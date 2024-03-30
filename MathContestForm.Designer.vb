@@ -27,8 +27,6 @@ Partial Class MathContestForm
         Me.NameLabel = New System.Windows.Forms.Label()
         Me.AgeTextBox = New System.Windows.Forms.TextBox()
         Me.AgeLabel = New System.Windows.Forms.Label()
-        Me.GradeLabel = New System.Windows.Forms.Label()
-        Me.GradeTextBox = New System.Windows.Forms.TextBox()
         Me.StudentInformationGroupBox = New System.Windows.Forms.GroupBox()
         Me.FirstNumberTextBox = New System.Windows.Forms.TextBox()
         Me.FirstNumberLabel = New System.Windows.Forms.Label()
@@ -48,6 +46,8 @@ Partial Class MathContestForm
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ButtonsGroupBox = New System.Windows.Forms.GroupBox()
         Me.MathContestToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GradeLabel = New System.Windows.Forms.Label()
+        Me.GradeTextBox = New System.Windows.Forms.TextBox()
         Me.StudentInformationGroupBox.SuspendLayout()
         Me.MathProblemGroupBox.SuspendLayout()
         Me.MathProblemTypeGroupBox.SuspendLayout()
@@ -90,26 +90,6 @@ Partial Class MathContestForm
         Me.AgeLabel.Size = New System.Drawing.Size(42, 22)
         Me.AgeLabel.TabIndex = 1
         Me.AgeLabel.Text = "Age"
-        '
-        'GradeLabel
-        '
-        Me.GradeLabel.AutoSize = True
-        Me.GradeLabel.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GradeLabel.Location = New System.Drawing.Point(339, 41)
-        Me.GradeLabel.Name = "GradeLabel"
-        Me.GradeLabel.Size = New System.Drawing.Size(59, 22)
-        Me.GradeLabel.TabIndex = 1
-        Me.GradeLabel.Text = "Grade"
-        '
-        'GradeTextBox
-        '
-        Me.GradeTextBox.Enabled = False
-        Me.GradeTextBox.Location = New System.Drawing.Point(343, 68)
-        Me.GradeTextBox.Name = "GradeTextBox"
-        Me.GradeTextBox.Size = New System.Drawing.Size(46, 30)
-        Me.GradeTextBox.TabIndex = 2
-        Me.MathContestToolTip.SetToolTip(Me.GradeTextBox, "This case is meant show the student's grade on this Math Contest. The grade will " &
-        "go from 1 to 4." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'StudentInformationGroupBox
         '
@@ -281,6 +261,7 @@ Partial Class MathContestForm
         '
         'ClearButton
         '
+        Me.ClearButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ClearButton.Location = New System.Drawing.Point(6, 103)
         Me.ClearButton.Name = "ClearButton"
         Me.ClearButton.Size = New System.Drawing.Size(178, 60)
@@ -304,6 +285,7 @@ Partial Class MathContestForm
         '
         'ExitButton
         '
+        Me.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ExitButton.Location = New System.Drawing.Point(6, 256)
         Me.ExitButton.Name = "ExitButton"
         Me.ExitButton.Size = New System.Drawing.Size(178, 60)
@@ -325,10 +307,31 @@ Partial Class MathContestForm
         Me.ButtonsGroupBox.TabIndex = 10
         Me.ButtonsGroupBox.TabStop = False
         '
+        'GradeLabel
+        '
+        Me.GradeLabel.AutoSize = True
+        Me.GradeLabel.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GradeLabel.Location = New System.Drawing.Point(336, 41)
+        Me.GradeLabel.Name = "GradeLabel"
+        Me.GradeLabel.Size = New System.Drawing.Size(59, 22)
+        Me.GradeLabel.TabIndex = 1
+        Me.GradeLabel.Text = "Grade"
+        '
+        'GradeTextBox
+        '
+        Me.GradeTextBox.Location = New System.Drawing.Point(340, 68)
+        Me.GradeTextBox.Name = "GradeTextBox"
+        Me.GradeTextBox.Size = New System.Drawing.Size(46, 30)
+        Me.GradeTextBox.TabIndex = 2
+        Me.MathContestToolTip.SetToolTip(Me.GradeTextBox, "This case is meant show the student's grade on this Math Contest. The grade will " &
+        "go from 1 to 4.")
+        '
         'MathContestForm
         '
+        Me.AcceptButton = Me.SubmitButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.ExitButton
         Me.ClientSize = New System.Drawing.Size(644, 380)
         Me.Controls.Add(Me.ButtonsGroupBox)
         Me.Controls.Add(Me.MathProblemTypeGroupBox)
@@ -351,8 +354,6 @@ Partial Class MathContestForm
     Friend WithEvents NameLabel As Label
     Friend WithEvents AgeTextBox As TextBox
     Friend WithEvents AgeLabel As Label
-    Friend WithEvents GradeLabel As Label
-    Friend WithEvents GradeTextBox As TextBox
     Friend WithEvents StudentInformationGroupBox As GroupBox
     Friend WithEvents FirstNumberTextBox As TextBox
     Friend WithEvents FirstNumberLabel As Label
@@ -372,4 +373,6 @@ Partial Class MathContestForm
     Friend WithEvents ExitButton As Button
     Friend WithEvents ButtonsGroupBox As GroupBox
     Friend WithEvents MathContestToolTip As ToolTip
+    Friend WithEvents GradeTextBox As TextBox
+    Friend WithEvents GradeLabel As Label
 End Class
