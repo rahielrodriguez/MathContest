@@ -1,7 +1,11 @@
-﻿Option Strict On
-Option Explicit On
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+﻿'Rahiel Rodriguez
+'RCET 0256
+'Spring 2024
+'Math Contest
+'https://github.com/rahielrodriguez/MathContest.git
 
+Option Strict On
+Option Explicit On
 Public Class MathContestForm
 
     Dim firstNumber As Integer
@@ -9,17 +13,16 @@ Public Class MathContestForm
     Dim correctAnswer As Double
     Dim currentAnswer As Double
     Dim message As String
-    Dim answersRecord As New List(Of String)
     Dim record As String
     Dim correctAnswerCounter As Integer
-    Dim incorrectAnswerCounter As Integer
+    Dim problemNumberCounter As Integer
     'TODO
     '[x]Set default values
     '[X]Set a program to use random numbers from 1 to 1000 to make an add, substract, multiplication or divide problems
     '[X]Create a validation process for all fields available
-    '[ ]Block the submit button if all the fields are not field correctly, and unlockit if all fields are filled right
-    '[ ]Make a program to shows a summary of all the math contest results up to the point when the button is pressed
-    '[ ]Block the summary button if there are not answers available, and unlockit if atleast one answer has been submitedd
+    '[x]Block the submit button if all the fields are not field correctly, and unlockit if all fields are filled right
+    '[x]Make a program to shows a summary of all the math contest results up to the point when the button is pressed
+    '[x]Block the summary button if there are not answers available, and unlockit if atleast one answer has been submitedd
 
     Sub SetDefaults()
 
@@ -29,10 +32,12 @@ Public Class MathContestForm
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
         AnswerTextBox.Text = ""
-        AnswerTextBox.Enabled = False
+        AddRadioButton.Checked = False
+        SubtractRadioButton.Checked = False
+        MultiplyRadioButton.Checked = False
+        DivideRadioButton.Checked = False
         SubmitButton.Enabled = False
         SummaryButton.Enabled = False
-
         AddRadioButton.Focus()
 
     End Sub
@@ -60,7 +65,7 @@ Public Class MathContestForm
         '[X]Age must be between 7 and 11
         '[x]Block submit button if age is not in range
         Dim age As UShort
-
+        'Validates that the age field is not empty and is a whole number
         Try
             age = CUShort(AgeTextBox.Text)
 
@@ -91,6 +96,7 @@ Public Class MathContestForm
         '[X]Grade must be between 1 and 4
         '[x]Block submit button if grade is not valid
         Dim grade As UShort
+        'vaidates that the grade field is not empty and is a whole number
         Try
             grade = CUShort(GradeTextBox.Text)
 
@@ -118,7 +124,9 @@ Public Class MathContestForm
 
     Sub Add()
         Randomize()
-
+        'stablishes first number as a random number from 1 to 100
+        'stablishes first number as a random number from 1 to 100
+        'adds those random numbers to generate a correct answer
         firstNumber = CInt(Rnd() * 99) + 1
         secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber + secondNumber)
@@ -130,7 +138,9 @@ Public Class MathContestForm
     End Sub
     Sub Subtract()
         Randomize()
-
+        'stablishes first number as a random number from 1 to 100
+        'stablishes first number as a random number from 1 to 100
+        'substracts those random numbers to generate a correct answer
         firstNumber = CInt(Rnd() * 99) + 1
         secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber - secondNumber)
@@ -141,7 +151,9 @@ Public Class MathContestForm
     End Sub
     Sub Multiplication()
         Randomize()
-
+        'stablishes first number as a random number from 1 to 100
+        'stablishes first number as a random number from 1 to 100
+        'multiplies those random numbers to generate a correct answer
         firstNumber = CInt(Rnd() * 99) + 1
         secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = CInt(firstNumber * secondNumber)
@@ -152,7 +164,9 @@ Public Class MathContestForm
     End Sub
     Sub Divition()
         Randomize()
-
+        'stablishes first number as a random number from 1 to 100
+        'stablishes first number as a random number from 1 to 100
+        'divides those random numbers to generate a correct answer
         firstNumber = CInt(Rnd() * 99) + 1
         secondNumber = CInt(Rnd() * 99) + 1
         correctAnswer = Math.Round((CDbl(firstNumber / secondNumber)), 2, MidpointRounding.AwayFromZero)
@@ -168,23 +182,47 @@ Public Class MathContestForm
         '[X]If answer is correct, record message in a list for summary
         '[X]If answer is incorrect, show a message with the correct answer
         '[x]If answer is incorrect, record message in a list for summary
+
         Try
             currentAnswer = CDbl(AnswerTextBox.Text)
-
+            'if answer is correct, then creates a congratulation message, adds one to the correct answer counter and one to the problem counter
             If currentAnswer = correctAnswer Then
                 correctAnswerCounter = correctAnswerCounter + 1
-                message &= $"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct{vbNewLine}"
-                answersRecord.Add(message)
-                MsgBox($"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct")
+                problemNumberCounter += 1
+                message &= $"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of {problemNumberCounter} questions are correct{vbNewLine}"
+                MsgBox($"Correct, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of {problemNumberCounter} questions are correct")
             ElseIf currentAnswer <> correctAnswer Then
-                incorrectAnswerCounter = incorrectAnswerCounter + 1
-                message &= $"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct{vbNewLine}"
-                answersRecord.Add(message)
-                MsgBox($"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of 5 questions are correct")
+                'If answer is incorrect, generates a message with the correct answer and adds one to the problem counter.
+                problemNumberCounter += 1
+                message &= $"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of {problemNumberCounter} questions are correct{vbNewLine}"
+                MsgBox($"Incorrect, the correct answer is {correctAnswer}{vbNewLine}{correctAnswerCounter} of {problemNumberCounter} questions are correct")
             End If
-            ClearProblem()
-        Catch ex As Exception
 
+            ClearProblem()
+
+            'If the problem counter is equal to 5, then the test will be restarted. If is not, the test will continue.
+            If problemNumberCounter = 5 Then
+                MsgBox($"{NameTextBox.Text} scored {correctAnswerCounter} out of {problemNumberCounter} problems.")
+                problemNumberCounter = 0
+                correctAnswerCounter = 0
+                NameTextBox.Enabled = True
+                AgeTextBox.Enabled = True
+                GradeTextBox.Enabled = True
+                SetDefaults()
+                ValidateName()
+                ValidateAge()
+                ValidateGrade()
+            Else
+                AnswerTextBox.Text = ""
+
+            End If
+
+        Catch ex As Exception
+            If AnswerTextBox.Text = "" Then
+                AnswerTextBox.Text = ""
+                AnswerTextBox.BackColor = Color.LightYellow
+                MsgBox("Please enter an answer.")
+            End If
         End Try
 
     End Sub
@@ -206,9 +244,15 @@ Public Class MathContestForm
     End Sub
 
     Sub ClearProblem()
+        AddRadioButton.Focus()
+        AddRadioButton.Checked = False
+        SubtractRadioButton.Checked = False
+        MultiplyRadioButton.Checked = False
+        DivideRadioButton.Checked = False
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
         AnswerTextBox.Text = ""
+
     End Sub
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
         SetDefaults()
@@ -219,6 +263,11 @@ Public Class MathContestForm
         AgeTextBox.Enabled = True
         GradeTextBox.Enabled = True
         AnswerTextBox.Enabled = False
+        AddRadioButton.Checked = False
+        SubtractRadioButton.Checked = False
+        MultiplyRadioButton.Checked = False
+        DivideRadioButton.Checked = False
+        AddRadioButton.Focus()
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
@@ -226,7 +275,6 @@ Public Class MathContestForm
     End Sub
 
     Private Sub SubmitButton_Click(sender As Object, e As EventArgs) Handles SubmitButton.Click
-        '[x]Block name, age and grade once is submitted
         NameTextBox.Enabled = False
         AgeTextBox.Enabled = False
         GradeTextBox.Enabled = False
@@ -250,13 +298,7 @@ Public Class MathContestForm
 
     Private Sub SummaryButton_Click(sender As Object, e As EventArgs) Handles SummaryButton.Click
 
-        'TODO
-        '[ ] summary has to show each result individualy as a list, not al concadenated
+        MsgBox($"{NameTextBox.Text} has a current score of {correctAnswerCounter} out of {problemNumberCounter} possible.")
 
-        Dim results As String = ""
-        For Each elem As String In answersRecord
-            results &= elem & $"{vbNewLine}"
-        Next
-        MsgBox(answersRecord, MsgBoxStyle.Information, "Math Contest Summary")
     End Sub
 End Class
